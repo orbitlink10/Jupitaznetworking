@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /admin
+Disallow: /login
+Disallow: /register
+Disallow: /cart
+Disallow: /checkout
+Disallow: /profile
+Disallow: /dashboard
+Disallow: /orders
+Disallow: /contact-us
+Disallow: /reset-password
+Disallow: /forgot-password
+
+Sitemap: https://jupitaz.co.ke/sitemap.xml

@@ -1,0 +1,117 @@
+{
+  "mikrotik-rb5009ug-s-in": {
+    "path": "images/products/mikrotik-rb5009ug-s-in.webp",
+    "source": "https://mikrotik.com/product/rb5009ug_s_in",
+    "image": "https://cdn.mikrotik.com/web-assets/rb_images/2065_tm.webp"
+  },
+  "mikrotik-rb4011igs-rm": {
+    "path": "images/products/mikrotik-rb4011igs-rm.webp",
+    "source": "https://mikrotik.com/product/rb4011igs_rm",
+    "image": "https://cdn.mikrotik.com/web-assets/rb_images/1633_tm.webp"
+  },
+  "mikrotik-router-hex-s-rb760igs": {
+    "path": "images/products/mikrotik-router-hex-s-rb760igs.webp",
+    "source": "https://mikrotik.com/product/hex_s",
+    "image": "https://cdn.mikrotik.com/web-assets/rb_images/1539_tm.webp"
+  },
+  "mikrotik-hex-rb750gr3": {
+    "path": "images/products/mikrotik-hex-rb750gr3.webp",
+    "source": "https://mikrotik.com/product/RB750Gr3",
+    "image": "https://cdn.mikrotik.com/web-assets/rb_images/1405_tm.webp"
+  },
+  "mikrotik-l009uigs-rm": {
+    "path": "images/products/mikrotik-l009uigs-rm.webp",
+    "source": "https://mikrotik.com/product/l009uigs_rm",
+    "image": "https://cdn.mikrotik.com/web-assets/rb_images/2267_tm.webp"
+  },
+  "mikrotik-ccr2004-16g-2s": {
+    "path": "images/products/mikrotik-ccr2004-16g-2s.webp",
+    "source": "https://mikrotik.com/product/ccr2004_16g_2splus",
+    "image": "https://cdn.mikrotik.com/web-assets/rb_images/2563_tm.webp"
+  },
+  "ubiquiti-u6-plus": {
+    "path": "images/products/ubiquiti-u6-plus.png",
+    "source": "https://store.ui.com/us/en/products/u6-plus",
+    "image": "https://cdn.ecomm.ui.com/products/6d5c6141-e2e9-416a-b789-53e59416bb1a/853bc73b-f65b-4e59-a171-75c9a4a4615e.png"
+  },
+  "ubiquiti-u6-lr": {
+    "path": "images/products/ubiquiti-u6-lr.png",
+    "source": "https://store.ui.com/us/en/products/u6-lr",
+    "image": "https://cdn.ecomm.ui.com/products/d8fee47d-b53e-4a86-a5cb-cf2f6ab1c5ef/4f1f5856-05c2-4989-970e-6751e6af7eb9.png"
+  },
+  "ubiquiti-u7-pro": {
+    "path": "images/products/ubiquiti-u7-pro.png",
+    "source": "https://store.ui.com/us/en/products/u7-pro",
+    "image": "https://cdn.ecomm.ui.com/products/fa8dd4e4-36c8-4c79-a928-22c7bff2ce29/ab5bc8a4-6135-402e-a695-e3ea5e16d3e6.png"
+  },
+  "ubiquiti-litebeam-m5-23": {
+    "path": "images/products/ubiquiti-litebeam-m5-23.png",
+    "source": "https://store.ui.com/us/en/products/lbe-m5-23",
+    "image": "https://cdn.ecomm.ui.com/products/1f94b4f2-935d-402e-b4be-4b464f21fbbb/a0f3de3b-91e7-4df4-8df2-4bedbd45c91f.png"
+  },
+  "ubiquiti-litebeam-5ac-gen2": {
+    "path": "images/products/ubiquiti-litebeam-5ac-gen2.png",
+    "source": "https://store.ui.com/us/en/products/litebeam-5ac",
+    "image": "https://cdn.ecomm.ui.com/products/5987bfd2-8c3c-4191-9f09-71654bb89925/22331e9c-e9ae-4380-9442-e8b880b10260.png"
+  },
+  "ubiquiti-nanobeam-5ac-gen2": {
+    "path": "images/products/ubiquiti-nanobeam-5ac-gen2.png",
+    "source": "https://store.ui.com/us/en/products/nanobeam-5ac",
+    "image": "https://cdn.ecomm.ui.com/products/75529694-2bf4-483a-878f-71ccf550dc54/da0f7bdd-fc2b-49a3-8273-f75f861fd86c.png"
+  },
+  "tp-link-archer-c6": {
+    "path": "images/products/tp-link-archer-c6.jpg",
+    "source": "https://www.tp-link.com/en/home-networking/wifi-router/archer-c6/",
+    "image": "https://static.tp-link.com/upload/image-line/Archer_C6_EU_6.0_overview_01_large_20250919062247p.jpg"
+  },
+  "tp-link-archer-ax23": {
+    "path": "images/products/tp-link-archer-ax23.jpg",
+    "source": "https://www.tp-link.com/en/home-networking/wifi-router/archer-ax23/",
+    "image": "https://static.tp-link.com/1large_1627273016330o.jpg"
+  },
+  "tp-link-tl-sg108": {
+    "path": "images/products/tp-link-tl-sg108.jpg",
+    "source": "https://www.tp-link.com/en/business-networking/unmanaged-switch/tl-sg108/",
+    "image": "https://static.tp-link.com/upload/image-line/TL-SG108_UN_5.0_01_large_20231024111419x.jpg"
+  },
+  "tp-link-tl-sg1016d": {
+    "path": "images/products/tp-link-tl-sg1016d.png",
+    "source": "https://www.tp-link.com/en/business-networking/unmanaged-switch/tl-sg1016d/",
+    "image": "https://static.tp-link.com/upload/image-line/TL-SG1016D(UN)12.0-package_large_20230816120731o.png"
+  },
+  "tp-link-tl-sg1024d": {
+    "path": "images/products/tp-link-tl-sg1024d.png",
+    "source": "https://www.tp-link.com/en/business-networking/unmanaged-switch/tl-sg1024d/",
+    "image": "https://static.tp-link.com/upload/image-line/TL-SG1024D(UN)11.0-package_large_20230831095701h.png"
+  },
+  "tp-link-tl-sg1008p": {
+    "path": "images/products/tp-link-tl-sg1008p.png",
+    "source": "https://www.tp-link.com/en/business-networking/poe-switch/tl-sg1008p/",
+    "image": "https://static.tp-link.com/upload/image-line/TL-SG1008P(UN)5.0_R_large_20230328093810r.png"
+  },
+  "d-link-dgs-1008a": {
+    "path": "images/products/d-link-dgs-1008a.png",
+    "source": "https://www.dlink.com/en/products/dgs-1008a-8-port-gigabit-easy-desktop-switch",
+    "image": "https://www.dlink.com/en/-/media/product-pages/dgs/1008a/assets/dgs1008a1.png"
+  },
+  "d-link-dgs-1024d": {
+    "path": "images/products/d-link-dgs-1024d.png",
+    "source": "https://www.dlink.com/en/products/dgs-1024d-24-port-gigabit-unmanaged-desktop-switch",
+    "image": "https://www.dlink.com/en/-/media/product-pages/dgs/1024d/dgs1024d1.png"
+  },
+  "d-link-dgs-1210-28p": {
+    "path": "images/products/d-link-dgs-1210-28p.png",
+    "source": "https://www.dlink.com/en/products/dgs-1210-28p-28-port-gigabit-smart-managed-poe-switch",
+    "image": "https://www.dlink.com/en/-/media/product-pages/dgs/1210/28p/dgs121028pf1front.png"
+  },
+  "tp-link-archer-c80": {
+    "path": "images/products/tp-link-archer-c80.jpg",
+    "source": "https://www.tp-link.com/en/home-networking/wifi-router/archer-c80/",
+    "image": "https://static.tp-link.com/1_large_1576202231392h.jpg"
+  },
+  "tp-link-archer-c54": {
+    "path": "images/products/tp-link-archer-c54.jpg",
+    "source": "https://www.tp-link.com/en/home-networking/wifi-router/archer-c54/",
+    "image": "https://static.tp-link.com/Archer-C54_UN_1.0_01_large_1593402529208i.jpg"
+  }
+}
