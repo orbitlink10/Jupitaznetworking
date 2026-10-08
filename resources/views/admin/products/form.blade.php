@@ -139,13 +139,13 @@
     });
     if (window.tinymce) {
         tinymce.init({
-            selector: '#product-description', license_key: 'gpl', height: 565,
+            selector: '#product-description', license_key: 'gpl', height: 400,
             menubar: 'file edit view insert format tools table',
             plugins: 'link image media code fullscreen table lists',
             toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | outdent indent | link image media | code fullscreen',
             toolbar_mode: 'wrap', branding: false, promotion: false, statusbar: false,
             placeholder: 'Write the product description here...',
-            content_style: 'body { font-family: Source Sans Pro, Segoe UI, sans-serif; font-size: 20px; padding: 18px; color: #111827; }',
+            content_style: 'body { font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif; font-size: 15px; padding: 16px 18px; color: #111827; }',
             setup: editor => editor.on('change', () => editor.save())
         });
         document.querySelector('.product-editor').addEventListener('submit', () => tinymce.triggerSave());

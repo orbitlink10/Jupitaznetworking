@@ -6,7 +6,7 @@
 <a href="{{ route('admin.products.create') }}" class="btn btn-brand"><i class="bi bi-plus-lg me-1" aria-hidden="true"></i> Add Product</a>
 @endsection
 @section('content')
-<div class="card">
+<div class="card product-list-card">
     <div class="product-list-header">
         <h2>Product List</h2>
         <form action="{{ route('admin.products.index') }}" method="get" class="product-search" role="search">

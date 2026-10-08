@@ -1,63 +1,71 @@
 @extends('layouts.dashboard')
-
 @section('title', 'Dashboard')
 @section('dashboard-title', 'Dashboard')
-@section('dashboard-subtitle', 'Jupitaz networking store overview.')
-
+@section('dashboard-subtitle', 'View and manage customer orders, products, and your networking catalogue.')
+@section('dashboard-eyebrow')
+    <span class="dashboard-pill">Admin Overview</span>
+@endsection
+@section('dashboard-actions')
+    <div class="dashboard-actions">
+        <a class="btn btn-brand" href="{{ route('admin.products.create') }}">+ New Product</a>
+        <a class="btn btn-outline-primary" href="{{ route('admin.products.index') }}">Manage Products</a>
+        <a class="btn btn-outline-primary" href="{{ route('admin.orders.index') }}">Manage Orders</a>
+    </div>
+@endsection
 @section('content')
-<div class="row g-3 mb-4">
-    <div class="col-6 col-md-3"><div class="card metric"><div class="card-body"><span class="text-muted small">Products</span><span class="fs-4 fw-bold">{{ $productCount }}</span><span class="small text-muted">{{ $activeProductCount }} active</span></div></div></div>
-    <div class="col-6 col-md-3"><div class="card metric"><div class="card-body"><span class="text-muted small">Categories</span><span class="fs-4 fw-bold">{{ $categoryCount }}</span></div></div></div>
-    <div class="col-6 col-md-3"><div class="card metric"><div class="card-body"><span class="text-muted small">Brands</span><span class="fs-4 fw-bold">{{ $brandCount }}</span></div></div></div>
-    <div class="col-6 col-md-3"><div class="card metric"><div class="card-body"><span class="text-muted small">Orders</span><span class="fs-4 fw-bold">{{ $orderCount }}</span><span class="small text-muted">{{ $pendingOrderCount }} pending</span></div></div></div>
+<div class="dashboard-breadcrumb">Admin <span class="mx-2">/</span> Overview</div>
+<div class="dashboard-metrics">
+    <article class="card overview-card metric-blue">
+        <span class="overview-icon">OR</span><p class="overview-label">Orders</p>
+        <h2 class="overview-number">{{ $orderCount }}</h2><small>{{ $pendingOrderCount }} pending orders</small>
+        <a class="overview-link" href="{{ route('admin.orders.index') }}">View orders <span aria-hidden="true">›</span></a>
+    </article>
+    <article class="card overview-card metric-teal">
+        <span class="overview-icon">PR</span><p class="overview-label">Products</p>
+        <h2 class="overview-number">{{ $productCount }}</h2><small>{{ $activeProductCount }} active products</small>
+        <a class="overview-link" href="{{ route('admin.products.index') }}">View products <span aria-hidden="true">›</span></a>
+    </article>
+    <article class="card overview-card metric-dark">
+        <span class="overview-icon">CA</span><p class="overview-label">Categories</p>
+        <h2 class="overview-number">{{ $categoryCount }}</h2><small>Product categories and subcategories</small>
+        <a class="overview-link" href="{{ route('admin.categories.index') }}">View categories <span aria-hidden="true">›</span></a>
+    </article>
+    <article class="card overview-card metric-red">
+        <span class="overview-icon">BR</span><p class="overview-label">Brands</p>
+        <h2 class="overview-number">{{ $brandCount }}</h2><small>Networking brands in your catalogue</small>
+        <a class="overview-link" href="{{ route('admin.brands.index') }}">View brands <span aria-hidden="true">›</span></a>
+    </article>
 </div>
-
-<div class="row g-4">
-    <div class="col-lg-7">
-        <div class="card p-4">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <h2 class="h6 fw-bold mb-0">Recent Orders</h2>
-                <a href="{{ route('admin.orders.index') }}" class="small">View all</a>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-sm align-middle">
-                    <thead><tr><th>Order</th><th>Customer</th><th class="text-end">Total</th><th>Status</th></tr></thead>
-                    <tbody>
-                        @forelse($recentOrders as $order)
-                            <tr>
-                                <td><a href="{{ route('admin.orders.show', $order->id) }}">{{ $order->order_number }}</a></td>
-                                <td>{{ $order->name }}</td>
-                                <td class="text-end">KSh {{ number_format($order->total) }}</td>
-                                <td><span class="badge text-bg-secondary">{{ $order->statusLabel() }}</span></td>
-                            </tr>
-                        @empty
-                            <tr><td colspan="4" class="text-muted">No orders yet.</td></tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+<div class="dashboard-metrics">
+    <article class="card summary-card metric-dark"><p class="overview-label">Total Revenue</p><h2 class="overview-number">KSh {{ number_format($revenue) }}</h2><small>Confirmed, processing and completed orders</small></article>
+    <article class="card summary-card metric-blue"><p class="overview-label">Recent Orders</p><h2 class="overview-number">{{ $recentOrders->count() }}</h2><small>Latest orders received</small></article>
+    <article class="card summary-card metric-red"><p class="overview-label">Customers</p><h2 class="overview-number">{{ $customerCount }}</h2><small>Registered customer accounts</small></article>
+    <article class="card summary-card metric-teal"><p class="overview-label">Active Products</p><h2 class="overview-number">{{ $activeProductCount }}</h2><small>Products available on the website</small></article>
+</div>
+<div class="dashboard-ops">
+    <section class="card dashboard-section">
+        <div class="dashboard-section-head"><div><p class="dashboard-section-kicker">Orders Desk</p><h2>Recent Orders</h2></div><a href="{{ route('admin.orders.index') }}" class="dashboard-section-meta">View all</a></div>
+        <div class="table-responsive">
+            <table class="table align-middle"><thead><tr><th scope="col">Order</th><th scope="col">Customer</th><th scope="col">Total</th><th scope="col">Status</th></tr></thead><tbody>
+                @forelse($recentOrders as $order)
+                    <tr><td><a href="{{ route('admin.orders.show', $order->id) }}">{{ $order->order_number }}</a></td><td>{{ $order->name }}</td><td class="text-nowrap">KSh {{ number_format($order->total) }}</td><td><span class="badge text-bg-secondary">{{ $order->statusLabel() }}</span></td></tr>
+                @empty
+                    <tr><td colspan="4" class="text-muted py-4">No orders yet.</td></tr>
+                @endforelse
+            </tbody></table>
         </div>
-    </div>
-    <div class="col-lg-5">
-        <div class="card p-4">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <h2 class="h6 fw-bold mb-0">Latest Products</h2>
-                <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-brand">Add Product</a>
-            </div>
-            <ul class="list-unstyled mb-0">
-                @foreach($recentProducts as $product)
-                    <li class="py-3 border-bottom d-flex align-items-center gap-3">
-                        <img src="{{ $product->imageUrl() }}" alt="{{ $product->name }}" width="80" height="64" style="object-fit:contain" loading="lazy">
-                        <div>
-                        <div class="fw-semibold">{{ $product->name }}</div>
-                        <small class="text-muted">{{ $product->brand?->name ?? 'No brand' }} · {{ $product->hasPrice() ? $product->formattedPrice() : 'Call for price' }}</small>
-                        </div>
-                        <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-outline-primary ms-auto">Update</a>
-                    </li>
-                @endforeach
-            </ul>
-            <a href="{{ route('admin.products.index') }}" class="mt-3">View all products <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+    </section>
+    <section class="card dashboard-section">
+        <div class="dashboard-section-head"><div><p class="dashboard-section-kicker">Catalog</p><h2>Latest Products</h2></div><a href="{{ route('admin.products.index') }}" class="dashboard-section-meta">View all</a></div>
+        <div class="table-responsive">
+            <table class="table align-middle"><thead><tr><th scope="col">Product</th><th scope="col">Price</th><th scope="col">Action</th></tr></thead><tbody>
+                @forelse($recentProducts as $product)
+                    <tr><td><div class="d-flex align-items-center gap-2"><img src="{{ $product->imageUrl() }}" alt="{{ $product->name }}" width="44" height="40" style="object-fit:contain" loading="lazy"><div>{{ $product->name }}<small class="d-block text-muted">{{ $product->brand?->name ?? 'No brand' }}</small></div></div></td><td>{{ $product->hasPrice() ? $product->formattedPrice() : 'Call for price' }}</td><td><a href="{{ route('admin.products.edit', $product->id) }}">Update</a></td></tr>
+                @empty
+                    <tr><td colspan="3" class="text-muted py-4">No products yet.</td></tr>
+                @endforelse
+            </tbody></table>
         </div>
-    </div>
+    </section>
 </div>
 @endsection

@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <title>@yield('title', 'Dashboard') - Jupitaz Admin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <link href="{{ asset('css/dashboard.css') }}?v={{ filemtime(public_path('css/dashboard.css')) }}" rel="stylesheet">
 </head>
-<body>
+<body class="{{ request()->routeIs('admin.dashboard') ? 'dashboard-overview' : '' }} {{ request()->routeIs('admin.products.index') ? 'dashboard-products' : '' }} {{ request()->routeIs('admin.products.create', 'admin.products.edit') ? 'dashboard-product-form' : '' }}">
 @php($user = auth()->user())
 <div class="dashboard-shell">
     <aside class="dashboard-sidebar">
@@ -65,6 +62,7 @@
     <main class="dashboard-main">
         <div class="dashboard-page-header">
             <div>
+                @yield('dashboard-eyebrow')
             @hasSection('dashboard-title')
                 <h1 class="dashboard-title">@yield('dashboard-title')</h1>
             @endif
