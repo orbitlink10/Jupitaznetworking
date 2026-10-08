@@ -48,7 +48,7 @@ class ProductController extends Controller
         $data['gallery'] = $this->galleryFrom($request);
 
         $product = Product::create($data);
-        $product->categories()->sync($request->input('categories', []));
+        $product->categories()->sync($this->categoryIds($request));
 
         return redirect()->route('admin.products.index')->with('success', 'Product created.');
     }
@@ -77,7 +77,7 @@ class ProductController extends Controller
         $data['gallery'] = $this->galleryFrom($request, $product->gallery ?? []);
 
         $product->update($data);
-        $product->categories()->sync($request->input('categories', []));
+        $product->categories()->sync($this->categoryIds($request));
 
         return redirect()->route('admin.products.index')->with('success', 'Product updated.');
     }
@@ -100,6 +100,20 @@ class ProductController extends Controller
             'key_features' => ['nullable', 'string'],
             'specifications' => ['nullable', 'string'],
             'price' => ['nullable', 'numeric', 'min:0'],
+            'marked_price' => ['nullable', 'numeric', 'min:0'],
+            'video_url' => ['nullable', 'url:http,https', 'max:2048', function ($attribute, $value, $fail) {
+                if (! in_array(strtolower((string) parse_url($value, PHP_URL_HOST)), ['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be'], true)) {
+                    $fail('Enter a valid YouTube video URL.');
+                }
+            }],
+            'category_id' => ['nullable', 'integer', 'exists:categories,id'],
+            'subcategory_id' => ['nullable', 'integer', 'exists:categories,id', function ($attribute, $value, $fail) use ($request) {
+                if (! Category::whereKey($value)->where('parent_id', $request->input('category_id'))->exists()) {
+                    $fail('Select a subcategory belonging to the selected category.');
+                }
+            }],
+            'categories' => ['nullable', 'array'],
+            'categories.*' => ['integer', 'exists:categories,id'],
             'stock_quantity' => ['required', 'integer', 'min:0'],
             'stock_status' => ['required', 'in:in_stock,out_of_stock'],
             'featured_image' => ['nullable', 'image', 'max:4096'],
@@ -118,7 +132,21 @@ class ProductController extends Controller
         $data['key_features'] = $this->linesToArray($request->input('key_features'));
         $data['specifications'] = $this->specificationsFrom($request->input('specifications'));
 
+        unset($data['category_id'], $data['subcategory_id'], $data['categories']);
+
         return $data;
+    }
+
+    private function categoryIds(Request $request): array
+    {
+        if ($request->has('category_id')) {
+            return array_values(array_unique(array_filter(array_merge(
+                [$request->input('category_id'), $request->input('subcategory_id')],
+                $request->input('categories', [])
+            ))));
+        }
+
+        return $request->input('categories', []);
     }
 
     private function linesToArray(?string $value): array

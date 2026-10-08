@@ -5,3 +5,30 @@ body,button,input,select,textarea{font-family:'Source Sans Pro','Segoe UI',Arial
 .product-list-header{padding:22px 26px;display:flex;align-items:center;justify-content:space-between;gap:20px}.product-list-header h2{font-size:1.3rem;font-weight:700;margin:0}.product-search{display:flex;gap:12px;width:min(100%,470px)}.product-table{margin:0;min-width:850px;color:#172438}.product-table thead th{background:#f4f6fb;color:#647895;font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;padding:18px}.product-table th,.product-table td{border:1px solid var(--dash-border)}.product-table th:first-child,.product-table td:first-child{border-left:0}.product-table th:last-child,.product-table td:last-child{border-right:0}.product-table td{padding:18px;height:158px}.product-image{width:150px;height:104px;object-fit:contain;border:1px solid #d4dff0;border-radius:12px;background:white;padding:6px}.product-name{color:#172438;text-decoration:none;font-weight:600}.product-name:hover{color:#1976ff}.product-actions{display:grid;gap:8px;min-width:112px}.product-actions .btn{width:100%;padding:7px 15px}.product-actions .btn-outline-info{color:#00a9c7;border-color:#00b8d8}.product-actions .btn-outline-info:hover{color:white;background:#00a9c7}.product-list-footer{padding:20px 26px}.product-list-footer .pagination{margin-bottom:0}
 .product-form-layout{display:grid;gap:24px}.product-form-card{padding:32px}.product-editor .form-label{font-size:1.1rem;font-weight:700;margin-bottom:12px}.product-editor .mb-3{margin-bottom:28px!important}.product-editor .form-control,.product-editor .form-select{padding:18px 22px}.product-editor .row{margin-bottom:28px}.product-editor h2{font-size:1.2rem;margin-bottom:24px}.product-editor .form-check{margin-top:14px}.metric .card-body{display:flex;flex-direction:column;gap:8px;min-height:140px;padding:24px}.metric .fs-4{font-size:2.2rem!important;color:#1976ff}
 @media(min-width:1600px){.dashboard-shell{grid-template-columns:360px minmax(0,1fr);gap:34px}.dashboard-brand{font-size:1.65rem}}@media(max-width:1100px){.dashboard-shell{grid-template-columns:260px minmax(0,1fr);gap:20px;padding:18px}.dashboard-brand{padding:18px 10px;font-size:1.15rem}.dashboard-logo{flex-basis:48px;height:48px}}@media(max-width:767px){.dashboard-shell{display:block;padding:12px}.dashboard-sidebar{position:relative;top:0;height:auto;margin-bottom:24px;padding:12px}.dashboard-brand{margin-bottom:12px;padding:14px}.sidebar-section{display:flex;flex-wrap:wrap;gap:4px}.sidebar-heading{width:100%;margin:12px}.sidebar-link{font-size:.9rem;padding:8px;gap:8px}.sidebar-icon{flex-basis:32px;height:32px;border-radius:10px}.dashboard-title{font-size:2rem}.dashboard-page-header{flex-wrap:wrap}.product-list-header{flex-direction:column;align-items:stretch;padding:20px}.product-search{width:100%}.product-search .form-control{min-width:0}.product-form-card{padding:20px}}
+/* Reference admin theme: generous desktop proportions and a fixed-height sidebar. */
+@media(min-width:1200px){
+.dashboard-shell{grid-template-columns:clamp(350px,26vw,496px) minmax(0,1fr);gap:36px;padding:28px}
+.dashboard-sidebar{top:28px;height:calc(100vh - 56px);padding:20px 18px;border-radius:34px}
+.dashboard-brand{padding:30px 35px;gap:20px;border-color:#e0e5ed;border-radius:30px;font-size:34px;line-height:1.1;margin-bottom:28px;min-height:150px}
+.dashboard-brand small{font-size:18px;margin-top:8px;letter-spacing:.18em}
+.dashboard-logo{flex-basis:88px;height:88px;border-radius:28px}
+.sidebar-link{gap:18px;padding:16px 24px;margin:12px 0;border-radius:28px;font-size:22px;min-height:98px}
+.sidebar-icon{flex-basis:66px;height:66px;border-radius:22px;font-size:24px}
+.sidebar-heading{font-size:18px;margin:28px 14px 14px;letter-spacing:.16em}
+.dashboard-main{padding-top:10px}
+.dashboard-title{font-size:64px;line-height:1.15;margin-bottom:12px}
+.dashboard-page-header{margin-bottom:34px}
+.dashboard-page-header p{font-size:26px;line-height:1.4}
+.product-form-card{padding:42px 44px;border-radius:34px}
+.product-editor .form-label{font-size:23px;margin-bottom:14px;line-height:1.3}
+.product-editor .mb-3{margin-bottom:34px!important}
+.product-editor .form-control,.product-editor .form-select{font-size:23px;padding:24px 28px;border-radius:22px;min-height:84px}
+.product-editor textarea.form-control{min-height:170px}
+.product-editor .form-select:disabled{background-color:#f8faff;color:#aab8cc}
+.product-form-section h2{font-size:38px;font-weight:700;margin-bottom:40px}
+.product-table td{height:196px;font-size:20px}.product-image{width:184px;height:118px}
+.product-actions .btn{padding:10px 22px;font-size:19px}.product-list-header{padding:22px 26px}.product-table thead th{font-size:16px}
+}
+.product-form-section{margin-top:34px;margin-bottom:34px}.product-editor .tox-tinymce{border:1px solid #d4dff0;border-radius:28px}.product-editor .tox .tox-menubar{padding:12px 18px;border-bottom:1px solid #e1e8f2}.product-editor .tox .tox-mbtn{font-family:inherit;font-size:18px;color:#111827}.product-editor .tox .tox-toolbar__primary{padding:12px 18px;border-bottom:1px solid #e1e8f2}.product-editor .tox .tox-tbtn{border:1px solid #e0e5ed;border-radius:12px;margin:6px 3px;width:52px;height:52px;color:#111827}.product-editor .tox .tox-toolbar__group{padding:0 2px;border:0}.product-editor .tox .tox-edit-area::before{border:0}
+@media(min-width:1200px) and (max-width:1500px){.dashboard-brand{font-size:27px;padding:26px 20px}.dashboard-logo{flex-basis:70px;height:70px}.sidebar-link{font-size:20px;padding:14px}.dashboard-title{font-size:54px}}
+@media(min-width:1600px){.dashboard-shell{grid-template-columns:496px minmax(0,1fr)}}

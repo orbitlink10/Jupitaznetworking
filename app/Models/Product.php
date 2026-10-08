@@ -12,13 +12,14 @@ class Product extends Model
         'brand_id', 'sku', 'name', 'slug', 'short_description', 'description',
         'key_features', 'specifications', 'price', 'stock_quantity', 'stock_status',
         'featured_image', 'gallery', 'meta_title', 'meta_description', 'canonical_url',
-        'is_active', 'is_featured', 'source_ref',
+        'is_active', 'is_featured', 'source_ref', 'marked_price', 'video_url',
     ];
 
     protected function casts(): array
     {
         return [
             'price' => 'decimal:2',
+            'marked_price' => 'decimal:2',
             'stock_quantity' => 'integer',
             'key_features' => 'array',
             'specifications' => 'array',

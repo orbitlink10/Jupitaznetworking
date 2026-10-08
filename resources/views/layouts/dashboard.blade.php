@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-<link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard.css') }}?v={{ filemtime(public_path('css/dashboard.css')) }}" rel="stylesheet">
 </head>
 <body>
 @php($user = auth()->user())
@@ -20,7 +20,6 @@
         <a class="dashboard-brand" href="{{ route('admin.dashboard') }}"><span class="dashboard-logo">J</span><span>Jupitaz Networking<small>Admin Panel</small></span></a>
 
         <div class="sidebar-section">
-            <p class="sidebar-heading">Overview</p>
             <a class="sidebar-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
                 <span class="sidebar-icon"><i class="bi bi-speedometer2"></i></span><span>Dashboard</span>
             </a>
@@ -28,11 +27,11 @@
 
         <div class="sidebar-section">
             <p class="sidebar-heading">Content Management</p>
-            <a class="sidebar-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}" href="{{ route('admin.products.index') }}">
-                <span class="sidebar-icon"><i class="bi bi-box-seam"></i></span><span>Products</span>
-            </a>
             <a class="sidebar-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
                 <span class="sidebar-icon"><i class="bi bi-grid-3x3-gap"></i></span><span>Categories</span>
+            </a>
+            <a class="sidebar-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}" href="{{ route('admin.products.index') }}">
+                <span class="sidebar-icon"><i class="bi bi-box-seam"></i></span><span>Products</span>
             </a>
             <a class="sidebar-link {{ request()->routeIs('admin.brands.*') ? 'active' : '' }}" href="{{ route('admin.brands.index') }}">
                 <span class="sidebar-icon"><i class="bi bi-tags"></i></span><span>Brands</span>
