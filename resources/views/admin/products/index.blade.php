@@ -1,53 +1,46 @@
 @extends('layouts.dashboard')
-
 @section('title', 'Products')
 @section('dashboard-title', 'Products')
-@section('dashboard-subtitle', 'Manage your networking product catalogue.')
-
+@section('dashboard-subtitle', 'Manage and view all products available in the system')
+@section('dashboard-actions')
+<a href="{{ route('admin.products.create') }}" class="btn btn-brand"><i class="bi bi-plus-lg me-1" aria-hidden="true"></i> Add Product</a>
+@endsection
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-    <form action="{{ route('admin.products.index') }}" method="get" class="d-flex gap-2">
-        <input type="text" name="q" value="{{ request('q') }}" class="form-control" placeholder="Search name or SKU">
-        <button class="btn btn-brand">Search</button>
-    </form>
-    <a href="{{ route('admin.products.create') }}" class="btn btn-brand"><i class="bi bi-plus-lg me-1"></i> Add Product</a>
-</div>
-
-<div class="card p-3">
+<div class="card">
+    <div class="product-list-header">
+        <h2>Product List</h2>
+        <form action="{{ route('admin.products.index') }}" method="get" class="product-search" role="search">
+            <input type="search" name="q" value="{{ request('q') }}" class="form-control" placeholder="Search by product name or SKU..." aria-label="Search products">
+            <button class="btn btn-brand" type="submit">Search</button>
+        </form>
+    </div>
     <div class="table-responsive">
-        <table class="table align-middle">
-            <thead><tr><th>Product</th><th>Brand</th><th>SKU</th><th class="text-end">Price</th><th class="text-end">Stock</th><th>Status</th><th></th></tr></thead>
+        <table class="table align-middle product-table">
+            <thead><tr><th scope="col">#</th><th scope="col">Image</th><th scope="col">Name</th><th scope="col">Price (KES)</th><th scope="col">Category</th><th scope="col">Stock / Status</th><th scope="col">Actions</th></tr></thead>
             <tbody>
                 @forelse($products as $product)
                     <tr>
-                        <td>
-                            <div class="d-flex align-items-center gap-2">
-                                <img src="{{ $product->imageUrl() }}" alt="" style="width:40px;height:40px;object-fit:contain;">
-                                <a href="{{ route('products.show', $product->slug) }}" target="_blank" class="fw-semibold text-dark">{{ $product->name }}</a>
-                            </div>
-                        </td>
-                        <td>{{ $product->brand?->name ?? '—' }}</td>
-                        <td class="text-muted">{{ $product->sku }}</td>
-                        <td class="text-end">{{ $product->hasPrice() ? $product->formattedPrice() : 'Call for price' }}</td>
-                        <td class="text-end">{{ $product->stock_quantity }}</td>
-                        <td>
-                            @if($product->is_active)<span class="badge text-bg-success">Active</span>@else<span class="badge text-bg-secondary">Inactive</span>@endif
-                            @if($product->is_featured)<span class="badge text-bg-info">Featured</span>@endif
-                        </td>
-                        <td class="text-end">
-                            <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
-                            <form action="{{ route('admin.products.destroy', $product->id) }}" method="post" class="d-inline" onsubmit="return confirm('Delete this product?');">
+                        <td>{{ $products->firstItem() + $loop->index }}</td>
+                        <td><img src="{{ $product->imageUrl() }}" alt="{{ $product->name }}" class="product-image" loading="lazy"></td>
+                        <td><a href="{{ route('products.show', $product->slug) }}" class="product-name">{{ $product->name }}</a><div class="small text-muted mt-1">{{ $product->sku }}</div>@if($product->brand)<div class="small text-muted">{{ $product->brand->name }}</div>@endif</td>
+                        <td class="text-nowrap">{{ $product->hasPrice() ? number_format((float) $product->price, 2) : 'Call for price' }}</td>
+                        <td>{{ $product->categories->pluck('name')->join(', ') ?: 'Uncategorized' }}</td>
+                        <td><div class="mb-2">{{ $product->stock_quantity }} units</div><span class="badge {{ $product->is_active ? 'text-bg-success' : 'text-bg-secondary' }}">{{ $product->is_active ? 'Active' : 'Inactive' }}</span>@if($product->is_featured)<span class="badge text-bg-info">Featured</span>@endif</td>
+                        <td><div class="product-actions">
+                            <a href="{{ route('products.show', $product->slug) }}" target="_blank" rel="noopener" class="btn btn-outline-info">Preview</a>
+                            <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-outline-primary">Update</a>
+                            <form action="{{ route('admin.products.destroy', $product->id) }}" method="post" onsubmit="return confirm('Delete this product?');">
                                 @csrf @method('DELETE')
-                                <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
                             </form>
-                        </td>
+                        </div></td>
                     </tr>
                 @empty
-                    <tr><td colspan="7" class="text-muted">No products yet.</td></tr>
+                    <tr><td colspan="7" class="text-center text-muted">{{ request('q') ? 'No products match your search.' : 'No products yet.' }}</td></tr>
                 @endforelse
             </tbody>
         </table>
     </div>
-    <div class="mt-3">{{ $products->links('pagination::bootstrap-5') }}</div>
+    <div class="product-list-footer">{{ $products->links('pagination::bootstrap-5') }}</div>
 </div>
 @endsection

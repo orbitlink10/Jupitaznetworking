@@ -14,7 +14,7 @@
 
 <div class="row g-4">
     <div class="col-lg-7">
-        <div class="card p-3">
+        <div class="card p-4">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h2 class="h6 fw-bold mb-0">Recent Orders</h2>
                 <a href="{{ route('admin.orders.index') }}" class="small">View all</a>
@@ -39,19 +39,24 @@
         </div>
     </div>
     <div class="col-lg-5">
-        <div class="card p-3">
+        <div class="card p-4">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h2 class="h6 fw-bold mb-0">Latest Products</h2>
                 <a href="{{ route('admin.products.create') }}" class="btn btn-sm btn-brand">Add Product</a>
             </div>
             <ul class="list-unstyled mb-0">
                 @foreach($recentProducts as $product)
-                    <li class="py-2 border-bottom">
+                    <li class="py-3 border-bottom d-flex align-items-center gap-3">
+                        <img src="{{ $product->imageUrl() }}" alt="{{ $product->name }}" width="80" height="64" style="object-fit:contain" loading="lazy">
+                        <div>
                         <div class="fw-semibold">{{ $product->name }}</div>
                         <small class="text-muted">{{ $product->brand?->name ?? 'No brand' }} · {{ $product->hasPrice() ? $product->formattedPrice() : 'Call for price' }}</small>
+                        </div>
+                        <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-outline-primary ms-auto">Update</a>
                     </li>
                 @endforeach
             </ul>
+            <a href="{{ route('admin.products.index') }}" class="mt-3">View all products <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
         </div>
     </div>
 </div>
