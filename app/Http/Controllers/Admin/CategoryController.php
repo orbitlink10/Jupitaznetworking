@@ -28,6 +28,9 @@ class CategoryController extends Controller
     {
         $data = $this->validated($request);
         $data['slug'] = $this->uniqueSlug($data['name']);
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('categories', 'public');
+        }
 
         Category::create($data);
 
@@ -48,6 +51,10 @@ class CategoryController extends Controller
 
         if ($request->input('name') !== $category->name) {
             $data['slug'] = $this->uniqueSlug($data['name'], $category->id);
+        }
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('categories', 'public');
         }
 
         $category->update($data);
@@ -74,10 +81,13 @@ class CategoryController extends Controller
             'icon' => ['nullable', 'string', 'max:100'],
             'sort_order' => ['nullable', 'integer'],
             'is_active' => ['nullable', 'boolean'],
+            'image' => ['nullable', 'image', 'max:4096'],
         ]);
 
         $data['is_active'] = $request->boolean('is_active');
         $data['sort_order'] = (int) ($data['sort_order'] ?? 0);
+
+        unset($data['image']);
 
         return $data;
     }

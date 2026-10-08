@@ -1,51 +1,43 @@
 @extends('layouts.dashboard')
-
 @section('title', 'Categories')
 @section('dashboard-title', 'Categories')
-@section('dashboard-subtitle', 'Manage your category taxonomy.')
-
+@section('dashboard-actions')
+<a href="{{ route('admin.categories.create') }}" class="btn btn-brand">Create New Category</a>
+@endsection
 @section('content')
-<div class="d-flex justify-content-end mb-3">
-    <a href="{{ route('admin.categories.create') }}" class="btn btn-brand"><i class="bi bi-plus-lg me-1"></i> Add Category</a>
-</div>
-
-<div class="card p-3">
-    <table class="table align-middle">
-        <thead><tr><th>Category</th><th>Slug</th><th>Subcategories</th><th>Status</th><th></th></tr></thead>
-        <tbody>
-            @forelse($categories as $category)
-                <tr>
-                    <td class="fw-semibold">{{ $category->name }}</td>
-                    <td class="text-muted">/{{ $category->slug }}/</td>
-                    <td>
-                        @foreach($category->children as $child)
-                            <span class="badge text-bg-light border me-1">{{ $child->name }}</span>
-                        @endforeach
-                    </td>
-                    <td>@if($category->is_active)<span class="badge text-bg-success">Active</span>@else<span class="badge text-bg-secondary">Inactive</span>@endif</td>
-                    <td class="text-end">
-                        <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
-                        <form action="{{ route('admin.categories.destroy', $category->id) }}" method="post" class="d-inline" onsubmit="return confirm('Delete this category?');">
-                            @csrf @method('DELETE')
-                            <button class="btn btn-sm btn-outline-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                @foreach($category->children as $child)
-                    <tr class="table-light">
-                        <td class="ps-4">↳ {{ $child->name }}</td>
-                        <td class="text-muted">/{{ $category->slug }}/{{ $child->slug }}/</td>
-                        <td></td>
-                        <td>@if($child->is_active)<span class="badge text-bg-success">Active</span>@else<span class="badge text-bg-secondary">Inactive</span>@endif</td>
-                        <td class="text-end">
-                            <a href="{{ route('admin.categories.edit', $child->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
-                        </td>
-                    </tr>
-                @endforeach
-            @empty
-                <tr><td colspan="5" class="text-muted">No categories yet.</td></tr>
-            @endforelse
-        </tbody>
-    </table>
+<div class="card category-list-panel">
+    <div class="table-responsive">
+        <table class="table align-middle category-table">
+            <thead><tr><th scope="col">ID</th><th scope="col">Name</th><th scope="col">Slug</th><th scope="col">Photo</th><th scope="col">Actions</th></tr></thead>
+            <tbody>
+                @forelse($categories as $root)
+                    @foreach(collect([$root])->concat($root->children) as $category)
+                        <tr>
+                            <td>{{ $category->id }}</td>
+                            <td>{{ $category->name }}@if($category->parent_id)<small class="d-block text-muted mt-1">Subcategory of {{ $root->name }}</small>@endif @if(!$category->is_active)<span class="badge text-bg-secondary mt-1">Inactive</span>@endif</td>
+                            <td>{{ $category->slug }}</td>
+                            <td>
+                                @if($category->image)
+                                    <img src="{{ $category->imageUrl() }}" alt="{{ $category->name }}" class="category-photo" loading="lazy">
+                                @else
+                                    <div class="category-photo category-photo-empty">No Image</div>
+                                @endif
+                            </td>
+                            <td><div class="category-actions">
+                                <a href="{{ route('categories.show', $category->path()) }}" target="_blank" rel="noopener" class="btn category-preview">Preview</a>
+                                <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn category-update">Update</a>
+                                <form method="post" action="{{ route('admin.categories.destroy', $category->id) }}" onsubmit="return confirm('Delete this category?');">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="btn category-delete">Delete</button>
+                                </form>
+                            </div></td>
+                        </tr>
+                    @endforeach
+                @empty
+                    <tr><td colspan="5" class="text-center text-muted py-4">No categories yet.</td></tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection

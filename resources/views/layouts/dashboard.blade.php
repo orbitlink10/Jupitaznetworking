@@ -10,7 +10,7 @@
 
     <link href="{{ asset('css/dashboard.css') }}?v={{ filemtime(public_path('css/dashboard.css')) }}" rel="stylesheet">
 </head>
-<body class="{{ request()->routeIs('admin.dashboard') ? 'dashboard-overview' : '' }} {{ request()->routeIs('admin.products.index') ? 'dashboard-products' : '' }} {{ request()->routeIs('admin.products.create', 'admin.products.edit') ? 'dashboard-product-form' : '' }}">
+<body class="{{ request()->routeIs('admin.dashboard') ? 'dashboard-overview' : '' }} {{ request()->routeIs('admin.products.index') ? 'dashboard-products' : '' }} {{ request()->routeIs('admin.products.create', 'admin.products.edit') ? 'dashboard-product-form' : '' }} {{ request()->routeIs('admin.categories.create', 'admin.categories.edit') ? 'dashboard-category-form' : '' }}">
 @php($user = auth()->user())
 <div class="dashboard-shell">
     <aside class="dashboard-sidebar">

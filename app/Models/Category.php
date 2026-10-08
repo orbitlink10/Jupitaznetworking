@@ -22,6 +22,19 @@ class Category extends Model
         return $this->belongsTo(Category::class, 'parent_id');
     }
 
+    public function imageUrl(): ?string
+    {
+        if (! $this->image) {
+            return null;
+        }
+
+        if (str_starts_with($this->image, 'https://') || str_starts_with($this->image, 'http://')) {
+            return $this->image;
+        }
+
+        return asset('storage/'.$this->image);
+    }
+
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id');
